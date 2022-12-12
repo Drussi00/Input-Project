@@ -7,6 +7,7 @@ import hb from "handlebars";
 import inlineCss from "inline-css";
 import QRCode from "qrcode";
 import { urlFor } from "../image";
+
 import PCR from "puppeteer-chromium-resolver";
 let options = {
   format: "A4",
