@@ -242,16 +242,10 @@ const isFree = async (req, res, next) => {
         const stats = await PCR(option);
         async function generatePdf(file, options, callback) {
           // we are using headless mode
-          let args = ["--no-sandbox", "--disable-setuid-sandbox"];
-          if (options.args) {
-            args = options.args;
-            delete options.args;
-          }
+          let args = { args: ["--no-sandbox"], headless: true };
 
           const browser = await stats.puppeteer.launch({
-            args: args,
-            headless: true,
-            executablePath: stats.executablePath,
+            args,
           });
           const page = await browser.newPage();
 
