@@ -7,8 +7,8 @@ import hb from "handlebars";
 import inlineCss from "inline-css";
 import QRCode from "qrcode";
 import { urlFor } from "../image";
-import { executablePath } from "puppeteer";
-import PCR from "puppeteer-chromium-resolver";
+import puppeteer, { executablePath } from "puppeteer";
+// import PCR from "puppeteer-chromium-resolver";
 
 let options = {
   format: "A4",
@@ -16,19 +16,7 @@ let options = {
   scale: 1,
   preferCSSPageSize: true,
 };
-const option = {
-  revision: "",
-  detectionPath: "",
-  folderName: ".chromium-browser-snapshots",
-  defaultHosts: [
-    "https://storage.googleapis.com",
-    "https://npm.taobao.org/mirrors",
-  ],
-  hosts: [],
-  cacheRevisions: 2,
-  retry: 3,
-  silent: false,
-};
+
 const isFree = async (req, res, next) => {
   const { evento, users, staff } = req.body;
   const projectId = config.projectId;
@@ -240,16 +228,18 @@ const isFree = async (req, res, next) => {
     </body>
   </html>`,
         };
-        const stats = await PCR(option);
+        // const stats = await PCR(option);
+        //1
         async function generatePdf(file, options, callback) {
+          console.log("1");
           // we are using headless mode
           let args = ["--no-sandbox"];
           if (options.args) {
             args = options.args;
             delete options.args;
           }
-
-          const browser = await stats.puppeteer.launch({
+          console.log(args);
+          const browser = await puppeteer.launch({
             args: args,
             headless: true,
             executablePath: executablePath(),
@@ -283,6 +273,7 @@ const isFree = async (req, res, next) => {
         }
 
         generatePdf(file, options).then(async (pdfBuffer) => {
+          console.log("2");
           await transporter.sendMail({
             from: `"inputlatam@gmail.com" <${process.env.CORREO_SECRET}>`, // sender address
             to: users[0].correo, // list of receivers
