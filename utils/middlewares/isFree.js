@@ -7,8 +7,9 @@ import hb from "handlebars";
 import inlineCss from "inline-css";
 import QRCode from "qrcode";
 import { urlFor } from "../image";
-
+import { executablePath } from "puppeteer";
 import PCR from "puppeteer-chromium-resolver";
+
 let options = {
   format: "A4",
   printBackground: true,
@@ -41,7 +42,6 @@ const isFree = async (req, res, next) => {
       }
     );
 
-    console.log("entro");
     if (event[0].precio >= 1) {
       req.evento = event;
       next();
@@ -252,7 +252,7 @@ const isFree = async (req, res, next) => {
           const browser = await stats.puppeteer.launch({
             args: args,
             headless: true,
-            executablePath: stats.executablePath,
+            executablePath: executablePath(),
           });
           const page = await browser.newPage();
 
