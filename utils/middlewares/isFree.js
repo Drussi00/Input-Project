@@ -250,7 +250,7 @@ const isFree = async (req, res, next) => {
 
           const browser = await stats.puppeteer.launch({
             args: args,
-            headless: false,
+            headless: true,
             executablePath: stats.executablePath,
           });
           const page = await browser.newPage();

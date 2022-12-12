@@ -11,7 +11,7 @@ handler.use(isAuth);
 handler.use(isFree);
 
 handler.post(async (req, res) => {
-  console.log("entro", req.body);
+  console.log("entro");
   const { evento, users, staff, ...resBody } = req.body;
   const projectId = config.projectId;
   const dataset = config.dataset;

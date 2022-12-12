@@ -20,9 +20,6 @@ import Product from "../components/MercadoPago";
 import classes from "../utils/classes";
 import jsCookie from "js-cookie";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI4OWQ1ODRmOC1mZDhiLTQyZjktYmQ5MS1iYWM3YTgxN2I3YzMiLCJuYW1lIjoiZGFuaSIsImVtYWlsIjoiZGFuaWVsLnJ1c3NpMTIxNUBob3RtYWlsLmNvbSIsInJvbCI6IkFkbWluIiwiaWF0IjoxNjY3OTM0MjAxLCJleHAiOjE2NzA1MjYyMDF9.92NIh1a3RB89jnejIbiVkOGz9_OK7etDE6Iz8s1fgV4";
-
 const generos = ["Masculino", "Femenino", "Indefinido"];
 const identificacion = ["Emprendedor", "Mentor", "Inversionista", "Aliado"];
 const Compradores = () => {
@@ -30,6 +27,10 @@ const Compradores = () => {
   const router = useRouter();
   const { state } = useContext(Store);
   const { userInfo, cart } = state;
+  const token =
+    userInfo?.token ||
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIzNVZJZjY4WTRXVVE3b25POHJXVjJOIiwibmFtZSI6ImRhIiwiZW1haWwiOiJkYW5pZWwucnVzc2lAaG90bWFpbC5jb20iLCJpYXQiOjE2NzA1NTY5MDEsImV4cCI6MTcwMTY2MDkwMX0.LzYk_ctZtZePX0_2M6SrC7zJ36_CnBPleECq-Xpyvds";
+
   const {
     control,
     handleSubmit,
@@ -119,9 +120,6 @@ const Compradores = () => {
         setGlobal(response.data);
       } catch (err) {
         console.log(err);
-        enqueueSnackbar(err.response, {
-          variant: "error",
-        });
       }
     };
     compradores();
