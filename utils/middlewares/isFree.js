@@ -7,7 +7,7 @@ import hb from "handlebars";
 import inlineCss from "inline-css";
 import QRCode from "qrcode";
 import { urlFor } from "../image";
-import puppeteer, { executablePath } from "puppeteer";
+import puppeteer from "puppeteer";
 // import PCR from "puppeteer-chromium-resolver";
 
 let options = {
@@ -242,11 +242,12 @@ const isFree = async (req, res, next) => {
           const browser = await puppeteer.launch({
             args: args,
             headless: true,
-            executablePath: executablePath(),
+            executablePath: puppeteer.executablePath(),
           });
           const page = await browser.newPage();
 
           if (file.content) {
+            console.log("iscontent");
             const dataChronium = await inlineCss(file.content, { url: "/" });
             // we have compile our code with handlebars
             const template = hb.compile(dataChronium, { strict: true });
@@ -255,9 +256,10 @@ const isFree = async (req, res, next) => {
 
             // We set the page content as the generated html by handlebars
             await page.setContent(html, {
-              waitUntil: "networkidle0", // wait for page to load completely
+              waitUntil: "networkidle2", // wait for page to load completely
             });
           } else {
+            console.log("isnotcontent");
             await page.goto(
               "https://www.npmjs.com/package/puppeteer-chromium-resolver"
             );
@@ -265,6 +267,7 @@ const isFree = async (req, res, next) => {
 
           return Promise.props(page.pdf(options))
             .then(async function (dataChronium) {
+              console.log("close");
               await browser.close();
 
               return Buffer.from(Object.values(dataChronium));
@@ -273,7 +276,7 @@ const isFree = async (req, res, next) => {
         }
 
         generatePdf(file, options).then(async (pdfBuffer) => {
-          console.log("2");
+          console.log("generar pdf");
           await transporter.sendMail({
             from: `"inputlatam@gmail.com" <${process.env.CORREO_SECRET}>`, // sender address
             to: users[0].correo, // list of receivers
