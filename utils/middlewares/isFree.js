@@ -242,7 +242,6 @@ const isFree = async (req, res, next) => {
           const browser = await puppeteer.launch({
             args: args,
             headless: true,
-            executablePath: puppeteer.executablePath(),
           });
           const page = await browser.newPage();
 
