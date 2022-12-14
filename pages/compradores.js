@@ -112,7 +112,6 @@ const Compradores = () => {
           staff,
         });
         const response = await axios.post(
-          //"/api/products/generateQR",
           "https://nv2022141202-1rktq8gj.uc.gateway.dev/service",
           { users, evento: cart._key, quantity: cart.quantity || 1, staff },
           { headers: { authorization: `${token}` } }
