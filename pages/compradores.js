@@ -113,7 +113,7 @@ const Compradores = () => {
         });
         const response = await axios.post(
           //"/api/products/generateQR",
-          "http://34.68.8.241/mercadopago",
+          "https://nv2022141202-1rktq8gj.uc.gateway.dev/service",
           { users, evento: cart._key, quantity: cart.quantity || 1, staff },
           { headers: { authorization: `${token}` } }
         );
