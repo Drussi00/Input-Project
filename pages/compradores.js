@@ -105,11 +105,19 @@ const Compradores = () => {
     const compradores = async () => {
       try {
         console.log("entro");
+        console.log("api keys : ", {
+          users,
+          evento: cart._key,
+          quantity: cart.quantity || 1,
+          staff,
+        });
         const response = await axios.post(
-          "/api/products/generateQR",
+          //"/api/products/generateQR",
+          "http://34.68.8.241/mercadopago",
           { users, evento: cart._key, quantity: cart.quantity || 1, staff },
           { headers: { authorization: `${token}` } }
         );
+
         enqueueSnackbar("Boleta enviada exitosamente revisa tu correo", {
           variant: "success",
         });

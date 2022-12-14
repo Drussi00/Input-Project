@@ -18,6 +18,7 @@ let options = {
 };
 
 const isFree = async (req, res, next) => {
+  consoe.log("este", req.body);
   const { evento, users, staff } = req.body;
   const projectId = config.projectId;
   const dataset = config.dataset;
