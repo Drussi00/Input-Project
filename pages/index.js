@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Banner from "../components/indexPage/Banner";
 import EventosDestacados from "../components/indexPage/EventoDestacado";
 import Funciona from "../components/indexPage/Funciona";
+
 export default function Home() {
   const [state, setState] = useState({
     eventos: [],
