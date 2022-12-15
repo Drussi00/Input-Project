@@ -2,11 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "cdn.sanity.io",
-      "cdn-icons-png.flaticon.com",
-      "nv2022141202-1rktq8gj.uc.gateway.dev",
-    ],
+    domains: ["cdn.sanity.io", "cdn-icons-png.flaticon.com"],
   },
 };
 
