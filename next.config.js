@@ -5,7 +5,9 @@ const nextConfig = {
     domains: [
       "cdn.sanity.io",
       "cdn-icons-png.flaticon.com",
-      "https://nv2022141202-1rktq8gj.uc.gateway.dev",
+      "nv2022141202-1rktq8gj.uc.gateway.dev",
     ],
   },
 };
+
+module.exports = nextConfig;
