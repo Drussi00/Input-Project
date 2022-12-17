@@ -113,7 +113,7 @@ const Compradores = () => {
           staff,
         });
         const response = await axios.post(
-          "https://input-latamservice-bji4fkwtvq-uc.a.run.app/mercadopago",
+          "https://latamservice-bji4fkwtvq-uc.a.run.app/mercadopago",
           { users, evento: cart._key, quantity: cart.quantity || 1, staff },
           { headers: { authorization: `${token}` } }
         );
